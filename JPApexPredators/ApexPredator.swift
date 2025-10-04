@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import MapKit
 struct ApexPredator : Decodable , Identifiable{
     let id : Int
     let name : String
@@ -16,12 +16,16 @@ struct ApexPredator : Decodable , Identifiable{
     let longitude : Double
     let movies : [String]
     let movieScenes : [MovieScene]
-   // let links : String
+    let link : String
+    
+    var location : CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
     
     var image : String {
         return name.lowercased().replacingOccurrences(of: " ", with: "")
     }
-    struct MovieScene : Decodable {
+    struct MovieScene : Decodable , Identifiable{
         let id : Int
         let movie : String
         let sceneDescription : String
